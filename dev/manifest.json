@@ -1,6 +1,6 @@
 {
 	"name" : "TinyMonkey", 
-	"version" : "1.0", 
+	"version" : "1.1", 
 	"description" : "This extension run tiny codes you inputted when a web is loaded.", 
 	
 	"background_page" : "background.html", 
