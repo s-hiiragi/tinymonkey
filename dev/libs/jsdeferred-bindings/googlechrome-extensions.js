@@ -1,7 +1,8 @@
 /*
  * JSDeferred Integration for GoogleChrome.
  * writtern By Yuichi Tateno <http://github.com/hotchpotch>.
- *
+ * modified By s_hiiragi <http://github.com/s_hiiragi>.
+ * 
  * MIT License.
  *
  * examples:
@@ -72,11 +73,6 @@ if (typeof Deferred.chrome == 'undefined')
 
     Deferred.chrome.registers('i18n', {
         getAcceptLanguages : [0],
-    });
-
-    Deferred.chrome.registers('toolstrip', {
-        collapse : [1],
-        expand   : [1],
     });
 
 })(Deferred);

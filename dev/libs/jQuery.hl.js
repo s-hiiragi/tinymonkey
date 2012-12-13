@@ -1,5 +1,7 @@
 /* @name         jQuery.hl.js
  * @description  jQuery utility plugins
+ * @author       s_hiiragi <https://github.com/s-hiiragi>
+ * License       MIT License
  */
 (function($) {
 	$.extend({

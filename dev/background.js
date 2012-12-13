@@ -56,5 +56,41 @@ bg.add_methods({
 		delete SITEINFO[params.id];
 		save_siteinfo();
 		callback();
+	}, 
+	// エクスポート
+	export_siteinfo: function(params, callback) {
+		var data = JSON.stringify(SITEINFO, null, 2);
+		if (!params.unformatted) {
+			data = data
+				.replace(/\\n/g, '\n      ')
+				.replace(/(code"\s*:\s*")/g, '$1\n      ');
+		}
+		callback({data: data});
+	}, 
+	// インポート
+	import_siteinfo: function(params, callback) {
+		var tab = new Array(params.tabsize+1).join(' ');
+		var data = params.data
+			.replace(/"code"\s*:\s*"((?:[^\"\\]|\\[\s\S])*)"/g, function(m, code) {
+				var indent_lev = Infinity;
+				var re_ln = /\n(\s*)/g;
+				while (true) {
+					var m = re_ln.exec(code);
+					if (!m) break;
+					
+					var lev = m[1].replace(/\t/g, tab).length;
+					if (lev < indent_lev) indent_lev = lev;
+				}
+				code = code.replace(new RegExp('\\n\\s{' + indent_lev + '}', 'g'), '\\n')
+				if (code.substring(0, 2) === '\\n') { code = code.substring(2); }
+				
+				return '"code":"' + code + '"';
+			});
+		var si = JSON.parse(data);
+		
+		SITEINFO = si;
+		save_siteinfo();
+		
+		callback();
 	}
 });

@@ -8,6 +8,7 @@
 
 <script src="libs/chromext_comm.js"></script>
 <script src="libs/jQuery.js"></script>
+<script src="libs/jquery.sortElements.js"></script>
 <script src="libs/jQuery.hl.js"></script>
 <script src="libs/jsdeferred.js"></script>
 <script src="libs/jsdeferred-bindings/googlechrome-extensions.js"></script>
@@ -31,13 +32,56 @@ $(function(){
 	<div>
 		<!-- 全ての設定に対する操作 -->
 		<div id="common-commands">
-			<label><input class="silent-remove" type="checkbox">削除確認をしない</label>
+			<label>
+				フィルタ
+				<span class="count-of-matched"></span>
+				<input class="filter" type="search" placeholder="キーワードを入力">
+			</label>
+			<label>
+				並び順
+				<select size="1" class="order">
+					<option value="do-nothing"></option>
+					<optgroup label="登録日時順">
+						<option value="date-desc">新→古</option>
+						<option value="date-asc">古→新</option>
+					</optgroup>
+					<optgroup label="タイトル順">
+						<option value="title-asc">昇順</option>
+						<option value="title-desc">降順</option>
+					</optgroup>
+					<optgroup label="URL 辞書順">
+						<option value="url-asc">昇順</option>
+						<option value="url-desc">降順</option>
+					</optgroup>
+				</select>
+			</label>
+			
+			<span class="gui-gap">
 			<input class="add-si" type="button" value="追加">
 			<input class="update-all-si" type="button" value="すべて更新">
 			<!-- <input class="remove-all-si" type="buton" value="すべて削除"> -->
-			<!-- <input class="export" type="button" value="エクスポート"> -->
-			<!-- <input class="import" type="button" value="インポート"> -->
+			<label><input class="silent-remove" type="checkbox">削除確認をしない</label>
+			
+			<span class="gui-gap">
+			<button class="inexport">
+				インポート<br>
+				エクスポート
+			</button>
 		</div>
+		
+		<!--  -->
+		<div id="inexport-form">
+			<textarea class="data" name="data" cols="64" rows="10"></textarea>
+			<div class="commands">
+				<input class="import" type="button" value="インポート">
+				<label>Tab size<input class="tab-size" name="tabsize" type="number" min="0" max="8" step="2" value="4"></label>
+				
+				<span class="gui-gap">
+				<input class="export-unformatted" type="button" value="エクスポート (非整形)">
+			</div>
+		</div>
+		
+		<div class="gui-gap"></div>
 		<ul id="SITEINFO">
 			<li class="si-temp dom-template"><!-- 設定編集フォームのテンプレート -->
 				<input type="hidden" name="id" class="id">
